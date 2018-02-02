@@ -57,6 +57,8 @@ function getSpotify(song){
 	  			if (err) {
 	    			return console.log('Error occurred: ' + err);
 	 			 }
+
+	 			log(data) ;
 				var dataArr = data.tracks.items; 
 
 				dataArr.forEach(function(element, index){
@@ -85,6 +87,7 @@ function getTweets(){
 				console.log("Date : " + element.created_at);
 				console.log("-----------------------------------");
 			});
+			log(tweets) ;
 		}
 		else{
 			console.log(error);
@@ -115,6 +118,8 @@ function getOmdb(movieName){
 			console.log("-----------------------------------");
 						
 		}
+
+		log(body);
 	});
 
 }
@@ -130,6 +135,19 @@ function getFileData(){
 		const dataArr = data.split(",");
 
 		processInputCommand(dataArr[0], dataArr[1]);
+
+	});
+}
+
+
+function log(logData){
+	fs.appendFile("log.txt", "\n***********************\n" + JSON.stringify(logData, null, 2) + "\n***********************\n", function(err) {
+
+	  if (err) {
+	    console.log(err);
+	  } else {
+	    console.log("Content Added to file log.txt!");
+	  }
 
 	});
 }
